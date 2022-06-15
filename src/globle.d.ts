@@ -1,4 +1,4 @@
-declare module 'wly-ui-react';
+// declare module 'wlyUI';
 declare module '*.svg';
 declare module '*.png';
 declare module '*.jpg';

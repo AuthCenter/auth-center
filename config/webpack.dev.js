@@ -11,7 +11,8 @@ module.exports = {
 	entry: path.resolve(__dirname, '../src/index.tsx'),
 	output: {
 		filename: 'js/[name].[chunkhash:8].js', // 文件名
-		path: path.resolve(__dirname, '../dist') // 文件输出地址
+		path: path.resolve(__dirname, '../dist'), // 文件输出地址
+		publicPath: '/dist/'
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
@@ -100,6 +101,10 @@ module.exports = {
 	devServer: {
 		// 新增webpack-dev-server 的配置
 		headers: { 'Access-Control-Allow-Origin': '*' },
+		historyApiFallback: {
+			index: '/dist/index.html',
+			disableDotRule: true
+		},
 		hot: true, // 热更新
 		open: {
 			app: {
@@ -113,7 +118,7 @@ module.exports = {
 		compress: true,
 		proxy: [
 			{
-				context: ['/pjServer', '/auth', '/config', 'themeTool'],
+				context: ['/pjServer', '/auth', '/config', '/themeTool', '/default'],
 				target: 'http://127.0.0.1:3000',
 				changeOrigin: true,
 				secure: false
